@@ -1,0 +1,2 @@
+1) For now I am removing features with a low R^2. Maybe I should reconsider this?
+2) Maybe view 0 actually represents a missing value?
