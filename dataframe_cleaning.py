@@ -18,12 +18,24 @@ def clean(housing_df):
         clean_null_columns(housing_df)))
 
 def convert_date_to_ordinal(housing_df):
+    '''
+    The OLS function cannot calculate a regression line on categorical values. This funcion converts the date_time data type to OLS friendly integer type.
+    '''
     df_cleaned = housing_df.copy()
     df_cleaned.date = df_cleaned.date.apply(lambda date : date.toordinal())
     return df_cleaned
 
 def fix_misleading_columns(housing_df):
-
+    '''
+    The basement and date columns are stored as strings but represent other data types. This function takes the steps to convert them to their intended data type.
+    
+    Sqft_Basement:
+        All values of '?' are replaced with the median.
+        Basement is cast to float from string.
+    Date:
+        Cast from string to date time.
+    
+    '''
     df_cleaned = housing_df.copy()
     #get the median of sqft to be inserted into all '?' columns
     bsmt_median = df_cleaned[df_cleaned.sqft_basement != "?"].sqft_basement.astype("float64").median()
